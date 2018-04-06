@@ -12,9 +12,9 @@ public class Favorito implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JoinColumn(name = "produto", referencedColumnName = "id")
+    @JoinColumn(name = "fornecedor", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Produto produto;
+    private UsuarioFornecedor fornecedor;
     @JoinColumn(name = "usuario", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Usuario usuario;
@@ -34,15 +34,15 @@ public class Favorito implements Serializable {
         this.usuario = usuario;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
+    public UsuarioFornecedor getFornecedor() {
+		return fornecedor;
+	}
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
+	public void setFornecedor(UsuarioFornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
 
-    @Override
+	@Override
     public int hashCode() {
         int hash = 5;
         hash = 67 * hash + Objects.hashCode(this.id);
