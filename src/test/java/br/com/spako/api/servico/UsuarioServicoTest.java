@@ -1,7 +1,7 @@
 package br.com.spako.api.servico;
 
 import static org.junit.Assert.assertNotNull;
-
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,8 +37,8 @@ public class UsuarioServicoTest {
 	
 	@Test
 	public void testBuscaPorEmail() {
-		Usuario u = usuarioServico.buscaPorEmail(EMAIL);
+		Optional<Usuario> u = usuarioServico.buscaPorEmail(EMAIL);
 		
-		assertNotNull(u);
+		assertNotNull(u.orElse(null));
 	}
 }

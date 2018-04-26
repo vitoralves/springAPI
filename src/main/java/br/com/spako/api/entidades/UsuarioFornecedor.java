@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.br.CNPJ;
+
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "usuario_fornecedor")
 public class UsuarioFornecedor implements Serializable {
@@ -32,6 +36,7 @@ public class UsuarioFornecedor implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Usuario usuario;
     @Column(nullable = false)
+    @CNPJ(message="CNPJ inválido!")
     private String cnpj;
     @Column(nullable = false)
     private String razao;
@@ -46,6 +51,7 @@ public class UsuarioFornecedor implements Serializable {
     @Column()
     private String logo;
     @Column()
+    @Email(message="Email inválido!")
     private String email;
 
     public UsuarioFornecedor() {

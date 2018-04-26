@@ -33,23 +33,30 @@ public class UsuarioServicoImpl implements UsuarioServico{
 	}
 
 	@Override
-	public Usuario buscaPorEmail(String email) {
+	public Optional<Usuario> buscaPorEmail(String email) {
 		log.info("Buscando usuario por email {}", email);
 		return usuarioRepositorio.findByEmail(email);
 	}
+	
+	@Override
+	public Optional<Usuario> buscaPorCpf(String cpf) {
+		log.info("Buscando usuário por cpf {}", cpf);
+		return usuarioRepositorio.findByCpf(cpf);
+	}
 
+	@Override
+	public Usuario persistir(Usuario u) {
+		log.info("Salvando usuario {}", u.getNome());
+		return usuarioRepositorio.save(u);
+	}
+	
 //	@Override
 //	public Optional<Usuario> autenticarUsuario(String email) {
 //		log.info("Autenticar usuario {}", email);
 //		return usuarioRepositorio.
 //	}
 //
-//	@Override
-//	public Usuario persistir(Usuario u) {
-//		log.info("Salvando usuario {}", u.getNome());
-//		
-//	}
-//
+	
 //	@Override
 //	public Usuario update(Usuario u) {
 //		// TODO Auto-generated method stub

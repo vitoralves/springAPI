@@ -11,11 +11,13 @@ public interface UsuarioServico {
 
     Optional<Usuario> buscaPorId(long id);
     
-    Usuario buscaPorEmail(String email);
+    Optional<Usuario> buscaPorEmail(String email);
+    
+    Optional<Usuario> buscaPorCpf(String cpf);
     
 //    Optional<Usuario> autenticarUsuario(String email);
 //    
-//    Usuario persistir(Usuario u);
+    Usuario persistir(Usuario u);
 //
 //    Usuario update(Usuario u);
 //
