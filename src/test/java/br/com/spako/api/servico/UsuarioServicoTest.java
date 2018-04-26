@@ -31,7 +31,7 @@ public class UsuarioServicoTest {
 
 	@Before
 	public void setUp() throws Exception {
-		BDDMockito.given(this.usuarioRepositorio.findByEmail(Mockito.anyString())).willReturn(new Usuario());
+		BDDMockito.given(this.usuarioRepositorio.findByEmail(Mockito.anyString())).willReturn(Optional.of(new Usuario()));
 		BDDMockito.given(this.usuarioRepositorio.save(Mockito.any(Usuario.class))).willReturn(new Usuario());
 	}
 	
