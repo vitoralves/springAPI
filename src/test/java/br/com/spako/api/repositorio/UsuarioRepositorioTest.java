@@ -1,6 +1,5 @@
 package br.com.spako.api.repositorio;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Optional;
@@ -53,12 +52,12 @@ public class UsuarioRepositorioTest {
 		assertNotNull(u.orElse(null));
 	}
 
-	@Test
-	public void testBuscaPorNome() {
-		Usuario u = this.usuarioRepositorio.findByNome(NOME);
-		
-		assertEquals(NOME, u.getNome());
-	}
+//	@Test
+//	public void testBuscaPorNome() {
+//		Usuario u = this.usuarioRepositorio.findByNome(NOME);
+//		
+//		assertEquals(NOME, u.getNome());
+//	}
 	
 	@Test
 	public void testBuscaPorId() {

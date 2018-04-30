@@ -1,6 +1,9 @@
 package br.com.spako.api.controle;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -11,9 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.spako.api.dtos.UsuarioDto;
@@ -32,6 +37,34 @@ public class UsuarioControle {
 	private UsuarioServico servico;
 
 	public UsuarioControle() {
+	}
+	
+	@GetMapping
+	public ResponseEntity<Response<List<UsuarioDto>>> obter(@RequestParam(value = "email", required = false) String email) {
+		List<Usuario> lista = new ArrayList<>();
+		Response<List<UsuarioDto>> response = new Response<List<UsuarioDto>>();
+		
+		if (email != null) {
+			log.info("Buscando usuario por email: {}", email);			
+			Optional<Usuario> usuario = servico.buscaPorEmail(email);
+			if (usuario.isPresent()) {
+				lista.add(usuario.get());
+			}
+		}else {
+			log.info("Buscando por todos usuários!");
+			lista = servico.buscaTodos();
+		}
+			
+		if (lista.isEmpty()){
+			log.info("Usuário não encontrado para email {}", email);
+			response.getErrors().add("Usuário não encontrado para email "+email);
+			return ResponseEntity.badRequest().body(response);
+		}
+		
+		List<UsuarioDto> listDto = new ArrayList<>();
+		lista.forEach(l -> listDto.add(this.converterEntidadeDto(l)));		
+		response.setData(listDto);
+		return ResponseEntity.ok(response);
 	}
 	
 	@PostMapping
