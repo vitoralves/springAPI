@@ -14,14 +14,8 @@ public interface UsuarioServico {
     Optional<Usuario> buscaPorEmail(String email);
     
     Optional<Usuario> buscaPorCpf(String cpf);
-    
-//    Optional<Usuario> autenticarUsuario(String email);
-//    
+        
     Usuario persistir(Usuario u);
-//
-//    Usuario update(Usuario u);
-//
-//    Usuario delete(long id);
-//
-//    List<Usuario> buscaPorNome(String nome);
+
+    void remover(long id);
 }

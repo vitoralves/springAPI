@@ -50,29 +50,10 @@ public class UsuarioServicoImpl implements UsuarioServico{
 		return usuarioRepositorio.save(u);
 	}
 	
-//	@Override
-//	public Optional<Usuario> autenticarUsuario(String email) {
-//		log.info("Autenticar usuario {}", email);
-//		return usuarioRepositorio.
-//	}
-//
-	
-//	@Override
-//	public Usuario update(Usuario u) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public Usuario delete(long id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Usuario> buscaPorNome(String nome) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public void remover(long id) {
+		log.info("removendo usuário com id{}", id);
+		usuarioRepositorio.deleteById(id);
+	}
 
 }
