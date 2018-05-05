@@ -85,7 +85,7 @@ public class UsuarioControle {
 	/*
 	 * Insere novas entidades
 	 */
-	@PostMapping(value="/cadastrar")
+	@PostMapping
 	public ResponseEntity<Response<UsuarioDto>> cadastrar(@Valid @RequestBody UsuarioDto dto, BindingResult result)
 			throws NoSuchAlgorithmException {
 		log.info("Cadastrando usuário: {}", dto.toString());
