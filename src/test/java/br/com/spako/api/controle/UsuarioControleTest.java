@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -50,6 +51,7 @@ public class UsuarioControleTest {
 	private static final int TIPO = 2;
 
 	@Test
+	@WithMockUser
 	public void testBuscarPorEmailInexistente() throws Exception {
 		BDDMockito.given(servico.buscaPorEmail(Mockito.anyString())).willReturn(Optional.empty());
 
@@ -59,6 +61,7 @@ public class UsuarioControleTest {
 	}
 
 	@Test
+	@WithMockUser
 	public void testBucarPorEmailExistente() throws Exception {
 		BDDMockito.given(servico.buscaPorEmail(Mockito.anyString())).willReturn(Optional.of(this.obterUsuario()));
 
@@ -76,6 +79,7 @@ public class UsuarioControleTest {
 	}
 
 	@Test
+	@WithMockUser
 	public void testBuscaTodos() throws Exception {
 		BDDMockito.given(servico.buscaTodos()).willReturn((this.obterUsuarioLista()));
 
@@ -93,6 +97,7 @@ public class UsuarioControleTest {
 	}
 
 	@Test
+	@WithMockUser
 	public void testCadastrar() throws Exception {
 		Usuario usuario = obterUsuario();
 		BDDMockito.given(servico.persistir(Mockito.any(Usuario.class))).willReturn(usuario);
@@ -113,6 +118,7 @@ public class UsuarioControleTest {
 	}
 
 	@Test
+	@WithMockUser
 	public void testRemover() throws Exception {
 		BDDMockito.given(servico.buscaPorId(Mockito.anyLong())).willReturn(Optional.of(new Usuario()));
 		

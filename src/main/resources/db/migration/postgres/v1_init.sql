@@ -1,4 +1,4 @@
-  CREATE TABLE public.avaliacoes
+ CREATE TABLE avaliacoes
 (
     id integer NOT NULL DEFAULT nextval('avaliacoes_id_seq'::regclass),
     descricao character varying(500) COLLATE pg_catalog."default",
@@ -8,11 +8,11 @@
     data_avaliacao date,
     CONSTRAINT avaliacoes_pkey PRIMARY KEY (id),
     CONSTRAINT avaliacoes_fornecedor_fkey FOREIGN KEY (fornecedor)
-        REFERENCES public.usuario_fornecedor (id) MATCH SIMPLE
+        REFERENCES usuario_fornecedor (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT avaliacoes_usuario_fkey FOREIGN KEY (usuario)
-        REFERENCES public.usuario_comum (id) MATCH SIMPLE
+        REFERENCES usuario_comum (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -21,10 +21,10 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.avaliacoes
+ALTER TABLE avaliacoes
     OWNER to postgres;
     
-CREATE TABLE public.categoria
+CREATE TABLE categoria
 (
     id integer NOT NULL DEFAULT nextval('categoria_id_seq'::regclass),
     nome character varying(90) COLLATE pg_catalog."default",
@@ -35,10 +35,10 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.categoria
+ALTER TABLE categoria
     OWNER to postgres;
 
-CREATE TABLE public.cidade
+CREATE TABLE cidade
 (
     id integer NOT NULL DEFAULT nextval('cidade_id_seq'::regclass),
     nome character varying(60) COLLATE pg_catalog."default",
@@ -51,22 +51,22 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.cidade
+ALTER TABLE cidade
     OWNER to postgres;
     
 
-CREATE TABLE public.favorito
+CREATE TABLE favorito
 (
     id integer NOT NULL DEFAULT nextval('favorito_id_seq'::regclass),
     produto integer,
     usuario integer,
     CONSTRAINT favorito_pkey PRIMARY KEY (id),
     CONSTRAINT favorito_produto_fkey FOREIGN KEY (produto)
-        REFERENCES public.produto (id) MATCH SIMPLE
+        REFERENCES produto (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT favorito_usuario_fkey FOREIGN KEY (usuario)
-        REFERENCES public.usuario (id) MATCH SIMPLE
+        REFERENCES usuario (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -75,21 +75,21 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.favorito
+ALTER TABLE favorito
     OWNER to postgres;
     
-CREATE TABLE public.fornecedor_categoria
+CREATE TABLE fornecedor_categoria
 (
     id integer NOT NULL DEFAULT nextval('fornecedor_categoria_id_seq'::regclass),
     fornecedor integer,
     categoria integer,
     CONSTRAINT fornecedor_categoria_pkey PRIMARY KEY (id),
     CONSTRAINT fornecedor_categoria_categoria_fkey FOREIGN KEY (categoria)
-        REFERENCES public.categoria (id) MATCH SIMPLE
+        REFERENCES categoria (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT fornecedor_categoria_fornecedor_fkey FOREIGN KEY (fornecedor)
-        REFERENCES public.usuario_fornecedor (id) MATCH SIMPLE
+        REFERENCES usuario_fornecedor (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -98,21 +98,21 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.fornecedor_categoria
+ALTER TABLE fornecedor_categoria
     OWNER to postgres;
     
-CREATE TABLE public.fornecedor_cidade
+CREATE TABLE fornecedor_cidade
 (
     id integer NOT NULL DEFAULT nextval('fornecedor_cidade_id_seq'::regclass),
     fornecedor integer,
     cidade integer,
     CONSTRAINT fornecedor_cidade_pkey PRIMARY KEY (id),
     CONSTRAINT fornecedor_cidade_cidade_fkey FOREIGN KEY (cidade)
-        REFERENCES public.cidade (id) MATCH SIMPLE
+        REFERENCES cidade (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT fornecedor_cidade_fornecedor_fkey FOREIGN KEY (fornecedor)
-        REFERENCES public.usuario_fornecedor (id) MATCH SIMPLE
+        REFERENCES usuario_fornecedor (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -121,17 +121,17 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.fornecedor_cidade
+ALTER TABLE fornecedor_cidade
     OWNER to postgres;
     
-CREATE TABLE public.fornecedor_galeria
+CREATE TABLE fornecedor_galeria
 (
     id integer NOT NULL DEFAULT nextval('fornecedor_galeria_id_seq'::regclass),
     fornecedor integer,
     image64 character varying COLLATE pg_catalog."default",
     CONSTRAINT fornecedor_galeria_pkey PRIMARY KEY (id),
     CONSTRAINT fornecedor_galeria_fornecedor_fkey FOREIGN KEY (fornecedor)
-        REFERENCES public.usuario_fornecedor (id) MATCH SIMPLE
+        REFERENCES usuario_fornecedor (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -140,21 +140,21 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.fornecedor_galeria
+ALTER TABLE fornecedor_galeria
     OWNER to postgres;
     
-CREATE TABLE public.fornecedor_subcategoria
+CREATE TABLE fornecedor_subcategoria
 (
     id integer NOT NULL DEFAULT nextval('fornecedor_subcategoria_id_seq'::regclass),
     fornecedor integer,
     subcategoria integer,
     CONSTRAINT fornecedor_subcategoria_pkey PRIMARY KEY (id),
     CONSTRAINT fornecedor_subcategoria_fornecedor_fkey FOREIGN KEY (fornecedor)
-        REFERENCES public.usuario_fornecedor (id) MATCH SIMPLE
+        REFERENCES usuario_fornecedor (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT fornecedor_subcategoria_subcategoria_fkey FOREIGN KEY (subcategoria)
-        REFERENCES public.subcategoria (id) MATCH SIMPLE
+        REFERENCES subcategoria (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -163,10 +163,10 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.fornecedor_subcategoria
+ALTER TABLE fornecedor_subcategoria
     OWNER to postgres;
     
-CREATE TABLE public.produto
+CREATE TABLE produto
 (
     id integer NOT NULL DEFAULT nextval('produto_id_seq'::regclass),
     nome character varying(60) COLLATE pg_catalog."default",
@@ -182,11 +182,11 @@ CREATE TABLE public.produto
     img4 bytea,
     CONSTRAINT produto_pkey PRIMARY KEY (id),
     CONSTRAINT produto_categoria_fkey FOREIGN KEY (categoria)
-        REFERENCES public.categoria (id) MATCH SIMPLE
+        REFERENCES categoria (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT produto_fornecedor_fkey FOREIGN KEY (fornecedor)
-        REFERENCES public.usuario_fornecedor (id) MATCH SIMPLE
+        REFERENCES usuario_fornecedor (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -195,21 +195,21 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.produto
+ALTER TABLE produto
     OWNER to postgres;
     
-CREATE TABLE public.produto_subcategoria
+CREATE TABLE produto_subcategoria
 (
     id integer NOT NULL DEFAULT nextval('produto_subcategoria_id_seq'::regclass),
     subcategoria integer,
     produto integer,
     CONSTRAINT produto_subcategoria_pkey PRIMARY KEY (id),
     CONSTRAINT produto_subcategoria_produto_fkey FOREIGN KEY (produto)
-        REFERENCES public.produto (id) MATCH SIMPLE
+        REFERENCES produto (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
     CONSTRAINT produto_subcategoria_subcategoria_fkey FOREIGN KEY (subcategoria)
-        REFERENCES public.subcategoria (id) MATCH SIMPLE
+        REFERENCES subcategoria (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -218,17 +218,17 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.produto_subcategoria
+ALTER TABLE produto_subcategoria
     OWNER to postgres;
     
-CREATE TABLE public.subcategoria
+CREATE TABLE subcategoria
 (
     id integer NOT NULL DEFAULT nextval('subcategoria_id_seq'::regclass),
     nome character varying(100) COLLATE pg_catalog."default",
     categoria integer,
     CONSTRAINT subcategoria_pkey PRIMARY KEY (id),
     CONSTRAINT subcategoria_categoria_fkey FOREIGN KEY (categoria)
-        REFERENCES public.categoria (id) MATCH SIMPLE
+        REFERENCES categoria (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -237,10 +237,10 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.subcategoria
+ALTER TABLE subcategoria
     OWNER to postgres;
     
-CREATE TABLE public.usuario
+CREATE TABLE usuario
 (
     id integer NOT NULL DEFAULT nextval('usuario_id_seq'::regclass),
     nome character varying(60) COLLATE pg_catalog."default",
@@ -259,10 +259,10 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.usuario
+ALTER TABLE usuario
     OWNER to postgres;
     
-CREATE TABLE public.usuario_comum
+CREATE TABLE usuario_comum
 (
     id integer NOT NULL DEFAULT nextval('usuario_comum_id_seq'::regclass),
     telefone character varying(30) COLLATE pg_catalog."default",
@@ -275,7 +275,7 @@ CREATE TABLE public.usuario_comum
     usuario integer,
     CONSTRAINT usuario_comum_pkey PRIMARY KEY (id),
     CONSTRAINT usuario_comum_usuario_fkey FOREIGN KEY (usuario)
-        REFERENCES public.usuario (id) MATCH SIMPLE
+        REFERENCES usuario (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -284,10 +284,10 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.usuario_comum
+ALTER TABLE usuario_comum
     OWNER to postgres;
     
-CREATE TABLE public.usuario_fornecedor
+CREATE TABLE usuario_fornecedor
 (
     id integer NOT NULL DEFAULT nextval('usuario_fornecedor_id_seq'::regclass),
     cnpj character varying(20) COLLATE pg_catalog."default",
@@ -309,7 +309,7 @@ CREATE TABLE public.usuario_fornecedor
     email character varying(100) COLLATE pg_catalog."default",
     CONSTRAINT usuario_fornecedor_pkey PRIMARY KEY (id),
     CONSTRAINT usuario_fornecedor_usuario_fkey FOREIGN KEY (usuario)
-        REFERENCES public.usuario (id) MATCH SIMPLE
+        REFERENCES usuario (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -318,5 +318,5 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.usuario_fornecedor
+ALTER TABLE usuario_fornecedor
     OWNER to postgres;

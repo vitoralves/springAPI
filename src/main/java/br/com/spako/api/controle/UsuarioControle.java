@@ -29,6 +29,7 @@ import br.com.spako.api.dtos.UsuarioDto;
 import br.com.spako.api.entidades.Usuario;
 import br.com.spako.api.response.Response;
 import br.com.spako.api.servico.UsuarioServico;
+import br.com.spako.api.util.SenhaUtil;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -84,7 +85,7 @@ public class UsuarioControle {
 	/*
 	 * Insere novas entidades
 	 */
-	@PostMapping
+	@PostMapping(value="/cadastrar")
 	public ResponseEntity<Response<UsuarioDto>> cadastrar(@Valid @RequestBody UsuarioDto dto, BindingResult result)
 			throws NoSuchAlgorithmException {
 		log.info("Cadastrando usuário: {}", dto.toString());
@@ -178,7 +179,7 @@ public class UsuarioControle {
 		u.setEmail(dto.getEmail());
 		u.setNome(dto.getNome());
 		u.setPrimeiroLogin(dto.isPrimeiroLogin());
-		u.setSenha(dto.getSenha());
+		u.setSenha(SenhaUtil.gerarBcrypt(dto.getSenha()));
 		u.setSobrenome(dto.getSobrenome());
 		u.setTipo(dto.getTipo());
 
