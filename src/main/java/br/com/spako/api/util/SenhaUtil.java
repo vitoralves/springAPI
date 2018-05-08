@@ -19,4 +19,5 @@ public class SenhaUtil {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder.encode(senha);
 	}
+	
 }

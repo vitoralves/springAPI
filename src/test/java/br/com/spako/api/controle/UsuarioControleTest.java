@@ -47,7 +47,7 @@ public class UsuarioControleTest {
 	private static final String NOME = "Teste";
 	private static final String SOBRENOME = "Testador";
 	private static final String CPF = "391.455.098-83";
-	private static final String SENHA = "$2a$08$US/nGf3a0KwzcO16CgLxle0ZsJxeOF5tAyCthA8UqdVW/qWznoPPa";
+	private static final String SENHA = "123";
 	private static final int TIPO = 2;
 
 	@Test
@@ -111,7 +111,6 @@ public class UsuarioControleTest {
 				.andExpect(jsonPath("$.data.sobrenome").value(SOBRENOME))
 				.andExpect(jsonPath("$.data.cpf").value(CPF))
 				.andExpect(jsonPath("$.data.email").value(EMAIL))
-				.andExpect(jsonPath("$.data.senha").value(SENHA))
 				.andExpect(jsonPath("$.data.primeiroLogin").value(false))
 				.andExpect(jsonPath("$.data.tipo").value(TIPO))
 				.andExpect(jsonPath("$.errors").isEmpty());

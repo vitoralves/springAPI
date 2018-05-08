@@ -59,7 +59,7 @@ public class UsuarioControle {
 		List<Usuario> lista = new ArrayList<>();
 		Response<List<UsuarioDto>> response = new Response<List<UsuarioDto>>();
 
-		if (email != null) {
+		if (email != null && !email.isEmpty()) {
 			log.info("Buscando usuario por email: {}", email);
 			Optional<Usuario> usuario = servico.buscaPorEmail(email);
 			if (usuario.isPresent()) {
